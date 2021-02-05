@@ -5,7 +5,7 @@ from selenium import webdriver
 
 # TODO Place the id strings here
 # TODO Replace ID TO BE ENTERED with actual strings used on the frontend
-# TODO Better format logs
+# TODO Better format logs write out in the logger method
 # TODO Finish forgot password and the fifth test
 
 class Tester:
@@ -70,7 +70,7 @@ class Tester:
         self.logger(log_data)
 
     '''
-    -- Verify if the "remember me" checkbox stored login details until unchecked
+    -- Verify if the "remember me" checkbox works correctly
     '''
     def remember_me_test(self, email_phone, password, checked_flag):
         log_data = {'test_name':'Field Validation Test', 'messages':[], 'error':''}
@@ -161,6 +161,14 @@ class Tester:
         '''
         # self.remember_me_test("","", True)
         # self.remember_me_test("","", False)
+
+        '''
+        -- TEST 04 - Forgot Password test
+        '''
+
+        '''
+        -- TEST 05 - TBD
+        '''
 
         self.dispose()
     
