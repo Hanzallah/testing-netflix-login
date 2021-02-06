@@ -5,6 +5,7 @@ import { JumbotronContainer } from '../containers/jumbotron';
 import { FreqAskedContainer } from '../containers/freqasked';
 import { FooterContainer } from '../containers/footer';
 
+
 export default function Home() {
   return (
     <>
@@ -14,7 +15,7 @@ export default function Home() {
           <Subheader.SubTitle>Watch anywhere. Cancel at any time.</Subheader.SubTitle>
           <OptForm>
             <OptForm.Input placeholder="Email address" />
-            <OptForm.Button>Try it now</OptForm.Button>
+            <OptForm.ButtonLink to="/signup" mail="TESTMAILI">  Try it now</OptForm.ButtonLink>
             <OptForm.Break />
             <OptForm.Text>Ready to watch? Enter your email to create or restart your membership.</OptForm.Text>
           </OptForm>
@@ -27,3 +28,4 @@ export default function Home() {
     </>
   );
 }
+
