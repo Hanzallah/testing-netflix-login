@@ -1,5 +1,5 @@
 import React from 'react';
-import { Freqtable, Form } from '../components';
+import { Freqtable, OptForm } from '../components';
 import freqAskedData from '../utils/freqasked';
 
 export function FreqAskedContainer() {
@@ -15,12 +15,12 @@ export function FreqAskedContainer() {
         ))}
       </Freqtable.Frame>
 
-      <Form>
-        <Form.Text>Ready to watch? Enter your email to create or restart your membership.</Form.Text>
-        <Form.Input placeholder="Email address" />
-        <Form.Button>Try it now</Form.Button>
-        <Form.Break />
-      </Form>
+      <OptForm>
+        <OptForm.Text>Ready to watch? Enter your email to create or restart your membership.</OptForm.Text>
+        <OptForm.Input placeholder="Email address" />
+        <OptForm.Button>Try it now</OptForm.Button>
+        <OptForm.Break />
+      </OptForm>
     </Freqtable>
   );
 }
