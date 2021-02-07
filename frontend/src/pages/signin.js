@@ -67,7 +67,7 @@ class SignIn extends React.Component {
               <Form.InvalidText hidden= {this.state.invalidPassword !== true}>
                 Your password should be 4-60 characters.
               </Form.InvalidText>
-              <Form.Link to="/signup">
+              <Form.Link to="/forgot">
                 Forgot Password?
             </Form.Link>
 

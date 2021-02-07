@@ -1,11 +1,12 @@
 import React from 'react';
-import { Home, SignIn, SignUp } from './pages';
+import { Home, SignIn, SignUp,Forgot } from './pages';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 
 export default function App() {
   const HOME = '/';
   const SIGN_UP = '/signup';
   const SIGN_IN = '/signin';
+  const FORGOT = '/forgot';
 
   return (
     <Router>
@@ -17,6 +18,9 @@ export default function App() {
       </Route>
       <Route exact path={SIGN_IN}>
         <SignIn/>
+      </Route>
+      <Route exact path={FORGOT}>
+        <Forgot/>
       </Route>
     </Router>
   );
