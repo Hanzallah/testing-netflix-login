@@ -13,8 +13,7 @@ class Tester:
         super().__init__()
         self.init_tester()
         self.url = "http://localhost:3000/login" 
-        self.logs = []
-
+ 
     '''
     -- Initialize the selenium firefox driver
     '''
