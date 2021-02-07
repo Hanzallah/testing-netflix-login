@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Error, Base, Title, Text, TextSmall, Link, Input, Submit, ForgetPassText } from './form';
+import { Container, Error, Base, Title, Text, TextSmall, Link, Input, Submit, ForgetPassText, InvalidText } from './form';
 
 export default function Form({ children, ...restProps }) {
     return <Container {...restProps}>{children}</Container>;
@@ -19,6 +19,10 @@ Form.Title = function FormTitle({ children, ...restProps }) {
 
 Form.Text = function FormText({ children, ...restProps }) {
     return <Text {...restProps}>{children}</Text>;
+};
+
+Form.InvalidText = function FormInvalidText({ children, ...restProps }) {
+    return <InvalidText {...restProps}>{children}</InvalidText>;
 };
 
 Form.ForgetPassText = function FormForgetPassText({ children, ...restProps }) {

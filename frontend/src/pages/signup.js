@@ -8,26 +8,29 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      preview: 'cancel',
       firstName: '',
-      setFirstName: '',
       emailAddress: GLOBALS.SIGNUPMAIL,
-      setEmailAddress: '',
       password: '',
-      setPassword: '',
       error: '',
-      isInvalid: this.firstName === '' || this.password === '' || this.emailAddress === '',
     }
     this.handleSignup = this.handleSignup.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.changeName = this.changeName.bind(this);
+    this.changeMail = this.changeMail.bind(this);
+    this.changePassword = this.changePassword.bind(this);
   }
 
   handleSignup = (event) => {
-    alert("CALISIYO BABACAN");
+    alert("Signed up.");
   };
 
-  handleChange(event) {
-    this.setState({ [event.target.name]: event.target.value });
+  changeName(val) {
+    this.setState({ firstName : val.target.value });
+  }
+  changeMail(val) {
+    this.setState({ emailAddress : val.target.value });
+  }
+  changePassword(val) {
+    this.setState({ password : val.target.value });
   }
 
   render() {
@@ -42,22 +45,20 @@ class SignUp extends Component {
             <Form.Base onSubmit={this.handleSignup}>
               <Form.Input
                 placeholder="First name"
-                value={this.state.firstName}
-                onChange={this.handleChange}
+                onChange={this.changeName}
               />
               <Form.Input
                 placeholder="Email"
                 value={this.state.emailAddress}
-                onChange={this.handleChange}
+                onChange={this.changeMail}
               />
               <Form.Input
                 type="password"
-                value={this.state.password}
                 autoComplete="off"
                 placeholder="Password"
-                onChange={this.handleChange}
+                onChange={this.changePassword}
               />
-              <Form.Submit disabled={this.state.isInvalid} type="submit" data-testid="sign-up">
+              <Form.Submit type="submit" data-testid="sign-up">
                 Sign Up
               </Form.Submit>
             </Form.Base>

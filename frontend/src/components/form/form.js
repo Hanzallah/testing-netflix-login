@@ -43,6 +43,12 @@ export const Text = styled.p`
   font-weight: 500;
 `;
 
+export const InvalidText = styled.p`
+  color: #e87c03;
+  font-size: 13px;
+  margin-top: 2px;
+`;
+
 export const ForgetPassText = styled(ReachRouterLink)`
   color: #fff;
   margin-left: 175px;
@@ -75,9 +81,9 @@ export const Input = styled.input`
   height: 50px;
   line-height: 50px;
   padding: 5px 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   &:last-of-type {
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
 `;
 
