@@ -14,7 +14,7 @@ class Home extends React.Component {
   }
 
   clickHandler() {
-    console.log("GIRDI");
+    console.log("It Works");
   }
 
 

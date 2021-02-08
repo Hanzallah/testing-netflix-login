@@ -87,6 +87,7 @@ export const Input = styled.input`
   }
 `;
 
+
 export const Submit = styled.button`
   background: #e50914;
   border-radius: 4px;
@@ -100,4 +101,8 @@ export const Submit = styled.button`
   &:disabled {
     opacity: 0.5;
   }
+`;
+
+export const Label = styled.label`
+  margin: 12px 0px;
 `;
