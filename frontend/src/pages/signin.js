@@ -20,25 +20,31 @@ class SignIn extends React.Component {
     this.changePassword = this.changePassword.bind(this);
   }
 
-  changeEmail = event => { this.setState({ emailAddress: event.target.value }); console.log("mail:" + this.state.emailAddress); }
-  changePassword = event => { this.setState({ password: event.target.value }); console.log("password" + this.state.password); }
+  changeEmail = event => { this.setState({ emailAddress: event.target.value }); }
+  changePassword = event => { this.setState({ password: event.target.value }); }
 
   handleSignin = (event) => {
     var mail = this.state.emailAddress;
     var n = mail.indexOf("@");
-    console.log("index:" + n)
     if (n == -1) {
       this.setState({ invalidMail: true });
-      //return <Route exact path='/'/>;
     }
     else if (this.state.password.length < 4) {
       this.setState({ invalidPassword: true });
     }
     else {
-      if (GLOBALS.rememberMe) {
-        GLOBALS.setUserMail(this.state.emailAddress);
+      const user = GLOBALS.findUser(this.state.emailAddress, this.state.password);
+      if(user !== 1)
+      {
+        this.setState({error: user});
       }
-      alert("Signed in.");
+      else
+      {
+        if (GLOBALS.rememberMe) {
+          GLOBALS.setUserMail(this.state.emailAddress);
+        }
+        alert("Signed in.");
+      }
     }
   };
 
@@ -52,14 +58,12 @@ class SignIn extends React.Component {
   };
 
   render() {
-    console.log("list:" + this.state.invalidMail)
-    //document.getElementById("myDIV").style.display = "none";
     return (
       <>
         <HeaderContainer>
           <Form>
             <Form.Title>Sign In</Form.Title>
-            {this.state.error && <Form.Error data-testid="error">{this.state.error}</Form.Error>}
+            <Form.Error hidden={this.state.error ===''}>{this.state.error}</Form.Error>
             <Form.Input
               placeholder="Email address"
               onChange={this.changeEmail}

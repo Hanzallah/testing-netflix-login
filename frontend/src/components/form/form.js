@@ -14,6 +14,18 @@ export const Container = styled.div`
   margin-bottom: 100px;
 `;
 
+export const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  background-color: #e87c03;
+  border-radius: 5px;
+  width: 100%;
+  margin: auto;
+  max-width: 450px;
+  padding: 60px 68px 40px;
+`;
+
 export const Error = styled.div`
   background: #e87c03;
   border-radius: 4px;
