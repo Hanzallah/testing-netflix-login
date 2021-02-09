@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { Form } from '../components';
-import { HeaderContainer } from '../containers/header';
+import { InHeaderContainer } from '../containers/inheader';
 import { FooterContainer } from '../containers/footer';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import * as GLOBALS from '../GLOBALS';
 class SignIn extends React.Component {
   constructor(props) {
@@ -60,7 +59,7 @@ class SignIn extends React.Component {
   render() {
     return (
       <>
-        <HeaderContainer>
+        <InHeaderContainer>
           <Form>
             <Form.Title>Sign In</Form.Title>
             <Form.Error hidden={this.state.error ===''}>{this.state.error}</Form.Error>
@@ -108,7 +107,7 @@ class SignIn extends React.Component {
               This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.
           </Form.TextSmall>
           </Form>
-        </HeaderContainer>
+        </InHeaderContainer>
         <FooterContainer />
       </>
     );
