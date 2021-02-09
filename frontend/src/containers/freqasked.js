@@ -1,7 +1,7 @@
 import React from 'react';
 import { Freqtable, OptForm } from '../components';
 import freqAskedData from '../utils/freqasked';
-
+import * as GLOBALS from '../GLOBALS';
 export function FreqAskedContainer() {
   return (
     <Freqtable>
@@ -18,7 +18,7 @@ export function FreqAskedContainer() {
       <OptForm>
         <OptForm.Text>Ready to watch? Enter your email to create or restart your membership.</OptForm.Text>
         <OptForm.Input placeholder="Email address" />
-        <OptForm.Button>Try it now</OptForm.Button>
+        <OptForm.ButtonLink to="/signup">  Try it now</OptForm.ButtonLink>
         <OptForm.Break />
       </OptForm>
     </Freqtable>

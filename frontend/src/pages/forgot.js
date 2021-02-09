@@ -20,18 +20,18 @@ class Forgot extends React.Component {
         </Forgotpass.Frame>      
 
           <Form>
-            <Form.Title>Forgot Password</Form.Title>
+            <Form.Title>Forgot Email/Password</Form.Title>
             <Form.Text>Enter email or phone</Form.Text>
               <Form.Input placeholder="Email address"/>
               <Form.Input placeholder="Phone"/>
 
 
               <Form.Link to="/forgot">
-              Do not remember email or phone.
+              I don't remember email or phone.
             </Form.Link>
 
               <Form.Submit >
-                Send email or message
+                Email/Message Me
             </Form.Submit>
           </Form>
       </Forgotpass>

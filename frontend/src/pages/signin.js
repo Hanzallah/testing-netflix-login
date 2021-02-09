@@ -29,7 +29,7 @@ class SignIn extends React.Component {
     if (n == -1) {
       this.setState({ invalidMail: true });
     }
-    else if (this.state.password.length < 4) {
+    if (this.state.password.length < 4) {
       this.setState({ invalidPassword: true });
     }
     else {
@@ -70,7 +70,7 @@ class SignIn extends React.Component {
             />
 
             <Form.InvalidText hidden={this.state.invalidMail !== true}>
-              Please enter a valid mail.
+              Please enter a valid email or phone number.
               </Form.InvalidText>
             <Form.Input
               type="password"
@@ -81,7 +81,7 @@ class SignIn extends React.Component {
 
 
             <Form.InvalidText hidden={this.state.invalidPassword !== true}>
-              Your password should be 4-60 characters.
+              Your password must contain between 4 and 60 characters.
               </Form.InvalidText>
 
 
