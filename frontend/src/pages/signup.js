@@ -24,13 +24,13 @@ class SignUp extends Component {
   };
 
   changeName(val) {
-    this.setState({ firstName : val.target.value });
+    this.setState({ firstName: val.target.value });
   }
   changeMail(val) {
-    this.setState({ emailAddress : val.target.value });
+    this.setState({ emailAddress: val.target.value });
   }
   changePassword(val) {
-    this.setState({ password : val.target.value });
+    this.setState({ password: val.target.value });
   }
 
   render() {
@@ -39,34 +39,37 @@ class SignUp extends Component {
       <>
         <HeaderContainer>
           <Form>
-            <Form.Title>Sign Up</Form.Title>
+            <Form.Title id="signupLblSignup" >Sign Up</Form.Title>
             {this.error && <Form.Error>{this.error}</Form.Error>}
 
             <Form.Base onSubmit={this.handleSignup}>
               <Form.Input
+                id="signupInpFirstName"
                 placeholder="First name"
                 onChange={this.changeName}
               />
               <Form.Input
+                id="signupInpEmail"
                 placeholder="Email"
                 value={this.state.emailAddress}
                 onChange={this.changeMail}
               />
               <Form.Input
+                id="signupInpPassword"
                 type="password"
                 autoComplete="off"
                 placeholder="Password"
                 onChange={this.changePassword}
               />
-              <Form.Submit type="submit" data-testid="sign-up">
+              <Form.Submit id="signupBtnSignup" type="submit" data-testid="sign-up">
                 Sign Up
               </Form.Submit>
             </Form.Base>
 
             <Form.Text>
-              Already a user? <Form.Link to="/signin">Sign in now.</Form.Link>
+              Already a user? <Form.Link id="signupBtnSignin" to="/signin">Sign in now.</Form.Link>
             </Form.Text>
-            <Form.TextSmall>
+            <Form.TextSmall id="signupLblCaptcha">
               This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.
             </Form.TextSmall>
           </Form>

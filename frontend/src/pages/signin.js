@@ -33,12 +33,10 @@ class SignIn extends React.Component {
     }
     else {
       const user = GLOBALS.findUser(this.state.emailAddress, this.state.password);
-      if(user !== 1)
-      {
-        this.setState({error: user});
+      if (user !== 1) {
+        this.setState({ error: user });
       }
-      else
-      {
+      else {
         if (GLOBALS.rememberMe) {
           GLOBALS.setUserMail(this.state.emailAddress);
         }
@@ -61,17 +59,19 @@ class SignIn extends React.Component {
       <>
         <InHeaderContainer>
           <Form>
-            <Form.Title>Sign In</Form.Title>
-            <Form.Error hidden={this.state.error ===''}>{this.state.error}</Form.Error>
+            <Form.Title id="signinLblSignin" >Sign In</Form.Title>
+            <Form.Error id="signinErrErr" hidden={this.state.error === ''}>{this.state.error}</Form.Error>
             <Form.Input
+              id="signinInpEmailAddress"
               placeholder="Email address"
               onChange={this.changeEmail}
             />
 
-            <Form.InvalidText hidden={this.state.invalidMail !== true}>
+            <Form.InvalidText id="signinErrValidEmail" hidden={this.state.invalidMail !== true}>
               Please enter a valid email or phone number.
               </Form.InvalidText>
             <Form.Input
+              id="signinInpPassword"
               type="password"
               autoComplete="off"
               placeholder="Password"
@@ -79,13 +79,13 @@ class SignIn extends React.Component {
             />
 
 
-            <Form.InvalidText hidden={this.state.invalidPassword !== true}>
+            <Form.InvalidText id="signinErrValidPassword" hidden={this.state.invalidPassword !== true}>
               Your password must contain between 4 and 60 characters.
               </Form.InvalidText>
 
 
-            <Form.Label>
-              <input type="checkbox"
+            <Form.Label id="signinLblRememberMe">
+              <input id="signinCheckBox" type="checkbox"
                 defaultChecked={GLOBALS.rememberMe}
                 onChange={this.handleChange}
               />
@@ -93,17 +93,17 @@ class SignIn extends React.Component {
             </Form.Label>
 
 
-            <Form.Link to="/forgot">
+            <Form.Link id="signinBtnForgotPassword" to="/forgot">
               Forgot Password?
             </Form.Link>
 
-            <Form.Submit onClick={this.handleSignin} type="submit" data-testid="sign-in">
+            <Form.Submit id="signinBtnSignin" onClick={this.handleSignin} type="submit" data-testid="sign-in">
               Sign In
             </Form.Submit>
             <Form.Text>
-              New to Netflix? <Form.Link to="/">Sign up now.</Form.Link>
+              New to Netflix? <Form.Link id="signinBtnSignup" to="/">Sign up now.</Form.Link>
             </Form.Text>
-            <Form.TextSmall>
+            <Form.TextSmall id="signinLblCaptcha">
               This page is protected by Google reCAPTCHA to ensure you're not a bot. Learn more.
           </Form.TextSmall>
           </Form>

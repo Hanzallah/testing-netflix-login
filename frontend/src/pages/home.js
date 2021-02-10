@@ -30,8 +30,8 @@ class Home extends React.Component {
             <Subheader.Title>Unlimited films, TV programmes and more.</Subheader.Title>
             <Subheader.SubTitle>Watch anywhere. Cancel at any time.</Subheader.SubTitle>
             <OptForm>
-              <OptForm.Input placeholder="Email address" onChange={this.setMail} />
-              <OptForm.ButtonLink to="/signup">  Try it now</OptForm.ButtonLink>
+              <OptForm.Input id="homeInpEmailAddress" placeholder="Email address" onChange={this.setMail} />
+              <OptForm.ButtonLink id="homeBtnTryItNow" to="/signup">  Try it now</OptForm.ButtonLink>
               <OptForm.Break />
               <OptForm.Text>Ready to watch? Enter your email to create or restart your membership.</OptForm.Text>
             </OptForm>

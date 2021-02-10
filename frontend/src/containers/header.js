@@ -9,7 +9,7 @@ export function HeaderContainer({ children }) {
     <Header>
       <Header.Frame>
         <Header.Logo to={HOME} src={logo} alt="Netflix" />
-        <Header.ButtonLink to={SIGN_IN}>Sign In</Header.ButtonLink>
+        <Header.ButtonLink id="headerBtnSignIn" to={SIGN_IN}>Sign In</Header.ButtonLink>
       </Header.Frame>
       {children}
     </Header>

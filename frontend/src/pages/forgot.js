@@ -6,7 +6,7 @@ import { Subheader, OptForm, Form } from '../components';
 class Forgot extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {  };
+    this.state = {};
   }
 
   render() {
@@ -16,24 +16,24 @@ class Forgot extends React.Component {
       <Forgotpass>
         <Forgotpass.Frame>
           <Forgotpass.Logo to={HOME} src={logo} alt="Netflix" />
-          <Forgotpass.ButtonLink to={SIGN_IN}>Sign In</Forgotpass.ButtonLink>
-        </Forgotpass.Frame>      
+          <Forgotpass.ButtonLink id="forgotBtnSignin" to={SIGN_IN}>Sign In</Forgotpass.ButtonLink>
+        </Forgotpass.Frame>
 
-          <Form>
-            <Form.Title>Forgot Email/Password</Form.Title>
-            <Form.Text>Enter email or phone</Form.Text>
-              <Form.Input placeholder="Email address"/>
-              <Form.Input placeholder="Phone"/>
+        <Form>
+          <Form.Title>Forgot Email/Password</Form.Title>
+          <Form.Text>Enter email or phone</Form.Text>
+          <Form.Input id="forgotInpEmail" placeholder="Email address" />
+          <Form.Input id="forgotInpPhone" placeholder="Phone" />
 
 
-              <Form.Link to="/forgot">
-              I don't remember email or phone.
+          <Form.Link id="forgotBtnSubmit" to="/forgot">
+            I don't remember email or phone.
             </Form.Link>
 
-              <Form.Submit >
-                Email/Message Me
+          <Form.Submit>
+            Email/Message Me
             </Form.Submit>
-          </Form>
+        </Form>
       </Forgotpass>
     );
   }
