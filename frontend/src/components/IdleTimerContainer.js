@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react'
 import IdleTimer from 'react-idle-timer'
 import Modal from 'react-modal'
 import * as GLOBALS from '../GLOBALS';
+import history from "../pages/history"
 
 Modal.setAppElement('#root')
 
@@ -19,8 +20,11 @@ function IdleTimerContainer({ children }) {
   const logOut = () => {
     setModalIsOpen(false)
     clearTimeout(sessionTimeoutRef.current)
-    console.log('User has been logged out')
+    console.log("logOut clicked");
     GLOBALS.setIsSignedIn(false);
+    GLOBALS.setMailAddress("");
+    GLOBALS.setUserMail("");
+    history.push('/');
   }
 
   const stayActive = () => {
@@ -32,19 +36,19 @@ function IdleTimerContainer({ children }) {
   return (
     <div>
       {children}
-      GLOBALS.isSignedin ? <IdleTimer
+      <IdleTimer
         ref={idleTimerRef}
         timeout={1000 * 5}
         onIdle={onIdle}
       />
-      {GLOBALS.isSignedin ? <Modal isOpen={modalIsOpen} id="TimeOutModal">
+      <Modal isOpen={modalIsOpen} id="TimeOutModal">
         <h2>You've been idle for a while!</h2>
         <p>You will be logged out soon</p>
         <div>
           <button onClick={logOut} id="TimeOutBtnLogOut">Log me out</button>
           <button onClick={stayActive} id="TimeOutBtnStay" >Keep me signed in</button>
         </div>
-      </Modal> : <div />}
+      </Modal>
     </div>
   )
 }
