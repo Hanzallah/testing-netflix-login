@@ -41,11 +41,11 @@ class Tester:
             select_pwd.clear()
             select_email_phone.send_keys(email_phone)
             select_pwd.send_keys(password)
-            time.sleep(1)
+            time.sleep(0.5)
 
             # submit fields
             login_button.click()
-            time.sleep(2)
+            time.sleep(0.5)
 
             # successful login
             if (self.url != self.driver.current_url):
@@ -54,9 +54,9 @@ class Tester:
                 # log back out
                 logout_button = self.driver.find_element_by_id("mainBtnHome")
                 logout_button.click()
-                time.sleep(1)
+                time.sleep(0.5)
                 self.driver.find_element_by_id("headerBtnSignIn").click()
-                time.sleep(1)
+                time.sleep(0.5)
             # empty username and password
             elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed() and self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
                 log_data['messages'].append("Email/Phone not entered")
@@ -92,30 +92,30 @@ class Tester:
             select_pwd.clear()
             select_email_phone.send_keys(email_phone)
             select_pwd.send_keys(password)
-            time.sleep(1)
+            time.sleep(0.5)
 
             # check remember me as checked_flag warrants
             select_checkbox = self.driver.find_element_by_id("signinCheckBox")
             if ((select_checkbox.is_selected() and not checked_flag) or (not select_checkbox.is_selected() and checked_flag)):
                 select_checkbox.click()
             
-            time.sleep(0.3)
+            time.sleep(0.5)
 
             # submit fields
             login_button.click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             # log back out
             logout_button = self.driver.find_element_by_id("mainBtnHome")
             logout_button.click()
-            time.sleep(1)
+            time.sleep(0.5)
             self.driver.find_element_by_id("headerBtnSignIn").click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             # refresh login link and log back in to check if remember me works
             login_button = self.driver.find_element_by_id("signinBtnSignin")
             login_button.click()
-            time.sleep(1)
+            time.sleep(0.5)
 
             # successful login again
             if (self.url != self.driver.current_url):
@@ -123,9 +123,9 @@ class Tester:
                 # log back out
                 logout_button = self.driver.find_element_by_id("mainBtnHome")
                 logout_button.click()
-                time.sleep(1)
+                time.sleep(0.5)
                 self.driver.find_element_by_id("headerBtnSignIn").click()
-                time.sleep(1)
+                time.sleep(0.5)
             else:
                 log_data['messages'].append(f"Remember me did not work")
         except Exception as e:
@@ -171,6 +171,7 @@ class Tester:
     -- Run all defined tests and log the results
     '''
     def test_runner(self):
+        start = time.time()
         self.driver.get(self.url)
 
         '''
@@ -207,6 +208,8 @@ class Tester:
         '''
 
         self.dispose()
+        end = time.time()
+        print(f'Program time: {end-start}')
     
     '''
     -- Dispose the driver once all tests are completed
