@@ -1,0 +1,36 @@
+--------------------------------------
+Test Name:
+- All empty fields test
+Messages:
+- Email/Phone not entered
+- Password not entered
+Error:
+- None
+--------------------------------------
+Test Name:
+- Correct email with empty password test
+Messages:
+- Password not entered
+Error:
+- None
+--------------------------------------
+Test Name:
+- Empty email with password test
+Messages:
+- Email/Phone not entered
+Error:
+- None
+--------------------------------------
+Test Name:
+- Incorrect email and password test
+Messages:
+- We could not find an account associated with this email address. Please try again or create a new account.
+Error:
+- None
+--------------------------------------
+Test Name:
+- Correct email and incorrect password test
+Messages:
+- The password is wrong. Please try again or reset your password.
+Error:
+- None
