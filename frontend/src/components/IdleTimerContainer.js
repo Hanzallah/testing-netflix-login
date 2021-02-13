@@ -14,7 +14,7 @@ function IdleTimerContainer({ children }) {
   const onIdle = () => {
     console.log(GLOBALS.isSignedin ? 'User signed in' : 'User not signed in')
     setModalIsOpen(true)
-    sessionTimeoutRef.current = setTimeout(logOut, 50000)
+    sessionTimeoutRef.current = setTimeout(logOut, 100000)
   }
 
   const logOut = () => {
@@ -38,7 +38,7 @@ function IdleTimerContainer({ children }) {
       {children}
       <IdleTimer
         ref={idleTimerRef}
-        timeout={1000 * 5}
+        timeout={1000 * 10}
         onIdle={onIdle}
       />
       <Modal isOpen={modalIsOpen} id="TimeOutModal">

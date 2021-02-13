@@ -34,3 +34,25 @@ Messages:
 - The password is wrong. Please try again or reset your password.
 Error:
 - None
+--------------------------------------
+Test Name:
+- Successful login test
+Messages:
+- Successful Login
+- Fields Verified Successfully
+Error:
+- None
+--------------------------------------
+Test Name:
+- Remember Me Test
+Messages:
+- Remember me did not work
+Error:
+- None
+--------------------------------------
+Test Name:
+- Remember Me Test
+Messages:
+- Remember me did not work
+Error:
+- None
