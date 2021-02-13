@@ -5,14 +5,13 @@ from selenium import webdriver
 
 # TODO Place the id strings here
 # TODO Replace ID TO BE ENTERED with actual strings used on the frontend
-# TODO Better format logs write out in the logger method
 # TODO Finish forgot password and the fifth test
 
 class Tester:
     def __init__(self):
         super().__init__()
         self.init_tester()
-        self.url = "http://localhost:3000/login" 
+        self.url = "http://localhost:3000/signin"
  
     '''
     -- Initialize the selenium firefox driver
@@ -29,14 +28,14 @@ class Tester:
     -- Check if empty login details are handled correctly
     -- Verify if correct login details redirect properly
     '''
-    def field_validation_test(self, email_phone, password):
-        log_data = {'test_name':'Field Validation Test', 'messages':[], 'error':''}
+    def field_validation_test(self, email_phone, password, test_name="Field Validation Test"):
+        log_data = {'test_name':test_name, 'messages':[], 'error':''}
 
         try:
             # get a handle to the input fields, and login button
-            select_email_phone = self.driver.find_element_by_id("ID TO BE ENTERED")
-            select_pwd = self.driver.find_element_by_id("ID TO BE ENTERED")
-            login_button = self.driver.find_element_by_id("ID TO BE ENTERED")
+            select_email_phone = self.driver.find_element_by_id("signinInpEmailAddress")
+            select_pwd = self.driver.find_element_by_id("signinInpPassword")
+            login_button = self.driver.find_element_by_id("signinBtnSignin")
 
             # enter the email and password
             select_email_phone.clear()
@@ -50,19 +49,26 @@ class Tester:
             time.sleep(2)
 
             # successful login
-            if (self.pageURL != self.driver.current_url):
+            if (self.url != self.driver.current_url):
                 log_data['messages'] = log_data['messages'].append("Successful Login")
                 log_data['messages'] = log_data['messages'].append("Fields Verified Successfully")
                 # log back out
                 logout_button = self.driver.find_element_by_id("ID TO BE ENTERED")
                 logout_button.click()
                 time.sleep(2)
-            # wrong or empty username
-            elif self.driver.find_element_by_id("Username Warner ID TO BE ENTERED") != "":
-                log_data['messages'].append("Incorrect Email/Phone entered")
-            # wrong or empty password
-            elif self.driver.find_element_by_id("Password Warner ID TO BE ENTERED") != "":
-                log_data['messages'].append("Incorrect Password entered")
+            # empty username and password
+            elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed() and self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
+                log_data['messages'].append("Email/Phone not entered")
+                log_data['messages'].append("Password not entered")
+            # empty password
+            elif self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
+                log_data['messages'].append("Password not entered")
+            # empty username
+            elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed():
+                log_data['messages'].append("Email/Phone not entered")
+            # wrong username and/or password
+            elif self.driver.find_element_by_id("signinErrErr").is_displayed():
+                log_data['messages'].append(self.driver.find_element_by_id("signinErrErr").text)
         except Exception as e:
             log_data['error'] = str(e)
         
@@ -71,8 +77,8 @@ class Tester:
     '''
     -- Verify if the "remember me" checkbox works correctly
     '''
-    def remember_me_test(self, email_phone, password, checked_flag):
-        log_data = {'test_name':'Field Validation Test', 'messages':[], 'error':''}
+    def remember_me_test(self, email_phone, password, checked_flag, test_name="Remember Me Test"):
+        log_data = {'test_name':test_name, 'messages':[], 'error':''}
 
         try:
             # get a handle to the input fields, and login button
@@ -108,7 +114,7 @@ class Tester:
             time.sleep(2)
 
             # successful login again
-            if (self.pageURL != self.driver.current_url):
+            if (self.url != self.driver.current_url):
                 log_data['messages'] = log_data['messages'].append(f"Remember me {checked_flag} works")
                 # log back out
                 logout_button = self.driver.find_element_by_id("ID TO BE ENTERED")
@@ -132,7 +138,15 @@ class Tester:
     def logger(self, log_data):
         try:
             with open("login_test_logs.txt", "a") as file:
-                file.write(json.dumps(log_data))
+                file.write("--------------------------------------\nTest Name:\n- ")
+                file.write(log_data['test_name'])
+                file.write(f"\nMessages:")
+                for msg in log_data['messages']:
+                    file.write(f"\n- {msg}")
+                if log_data['error'] == "":
+                    file.write(f"\nError:\n- None")
+                else:
+                    file.write(f"\nError:\n- {log_data['error']}")
                 file.write('\n')
             file.close
         except:
@@ -147,8 +161,16 @@ class Tester:
         '''
         -- TEST 01 - Empty fields test and incorrect fields test
         '''
-        # self.field_validation_test("","")
-        # self.field_validation_test("INCORRECT_EMAIL","INCORRECT_PWD")
+        self.field_validation_test("","", "All empty fields test")
+        self.driver.refresh()
+        self.field_validation_test("hanzallah@gmail.com","", "Correct email with empty password test")
+        self.driver.refresh()
+        self.field_validation_test("","1234", "Empty email with password test")
+        self.driver.refresh()
+        self.field_validation_test("bot@outlook.com","$vduew2191BA", "Incorrect email and password test")
+        self.driver.refresh()
+        self.field_validation_test("hanzallah@gmail.com","$vduew2191BA", "Correct email and incorrect password test")
+        
 
         '''
         -- TEST 02 - successful login and correct field verification test
@@ -181,6 +203,7 @@ class Tester:
 '''
 def main():
     tester = Tester()
+    tester.test_runner()
 
 if __name__ == '__main__':
     main()
