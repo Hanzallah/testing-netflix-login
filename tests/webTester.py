@@ -5,7 +5,6 @@ from selenium import webdriver
 
 # TODO Place the id strings here
 # TODO Replace ID TO BE ENTERED with actual strings used on the frontend
-# TODO Better format logs write out in the logger method
 # TODO Finish forgot password and the fifth test
 
 class Tester:
@@ -176,7 +175,7 @@ class Tester:
         '''
         -- TEST 02 - successful login and correct field verification test
         '''
-        # self.field_validation_test("CORRECT_EMAIL","CORRECT_PWD")
+        self.field_validation_test("hanzallah@gmail.com","1234", "Successful login test")
 
         '''
         -- TEST 03 - Remember Me test
