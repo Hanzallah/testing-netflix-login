@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Form } from '../components';
 import { InHeaderContainer } from '../containers/inheader';
 import { FooterContainer } from '../containers/footer';
 import * as GLOBALS from '../GLOBALS';
+import history from "./history"
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +20,12 @@ class SignIn extends React.Component {
     this.changePassword = this.changePassword.bind(this);
   }
 
+
   changeEmail = event => { this.setState({ emailAddress: event.target.value }); }
   changePassword = event => { this.setState({ password: event.target.value }); }
 
   handleSignin = (event) => {
+    event.preventDefault();
     var mail = this.state.emailAddress;
     var n = mail.indexOf("@");
     if (n == -1) {
@@ -40,7 +43,9 @@ class SignIn extends React.Component {
         if (GLOBALS.rememberMe) {
           GLOBALS.setUserMail(this.state.emailAddress);
         }
-        alert("Signed in.");
+        GLOBALS.setIsSignedIn(true);
+        history.push('/main');
+
       }
     }
   };
