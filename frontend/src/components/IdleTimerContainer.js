@@ -23,7 +23,6 @@ function IdleTimerContainer({ children }) {
     console.log("logOut clicked");
     GLOBALS.setIsSignedIn(false);
     GLOBALS.setMailAddress("");
-    GLOBALS.setUserMail("");
     history.push('/');
   }
 

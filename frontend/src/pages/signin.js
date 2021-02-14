@@ -8,7 +8,7 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      emailAddress: '',
+      emailAddress: GLOBALS.userMail,
       password: '',
       error: '',
       invalidMail: false,
@@ -60,6 +60,7 @@ class SignIn extends React.Component {
   };
 
   render() {
+
     return (
       <>
         <InHeaderContainer>
@@ -69,6 +70,7 @@ class SignIn extends React.Component {
             <Form.Input
               id="signinInpEmailAddress"
               placeholder="Email address"
+              value={this.state.emailAddress}
               onChange={this.changeEmail}
             />
 
