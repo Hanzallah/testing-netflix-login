@@ -44,15 +44,15 @@ Error:
 - None
 --------------------------------------
 Test Name:
-- Remember Me Test
+- Remember me checked test
 Messages:
-- Remember me did not work
+- Remember me checked works
 Error:
 - None
 --------------------------------------
 Test Name:
-- Remember Me Test
+- Remember me unchecked test
 Messages:
-- Remember me did not work
+- Remember me unchecked works
 Error:
 - None
