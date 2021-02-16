@@ -2,6 +2,7 @@ import time
 import datetime
 import json
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
 
 # TODO Finish forgot password and the session timout tests
 
@@ -24,7 +25,6 @@ class Tester:
     '''
     -- Check if incorrect login details are handled correctly
     -- Check if empty login details are handled correctly
-    -- Verify if correct login details redirect properly
     '''
     def field_validation_test(self, email_phone, password, test_name="Field Validation Test"):
         log_data = {'test_name':test_name, 'messages':[], 'error':''}
@@ -35,7 +35,49 @@ class Tester:
             select_pwd = self.driver.find_element_by_id("signinInpPassword")
             login_button = self.driver.find_element_by_id("signinBtnSignin")
             
+            # enter the email and password
+            select_email_phone.clear()
+            select_pwd.clear()
+            select_email_phone.send_keys(email_phone)
+            select_pwd.send_keys(password)
+            time.sleep(0.1)
 
+            # submit fields
+            login_button.click()
+            time.sleep(0.1)
+
+            # empty username and password
+            if self.driver.find_element_by_id("signinErrValidEmail").is_displayed() and self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
+                log_data['messages'].append("Email/Phone not entered")
+                log_data['messages'].append("Password not entered")
+            # empty password
+            elif self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
+                log_data['messages'].append("Password not entered")
+            # empty username
+            elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed():
+                log_data['messages'].append("Email/Phone not entered")
+            # wrong username and/or password
+            elif self.driver.find_element_by_id("signinErrErr").is_displayed():
+                log_data['messages'].append(self.driver.find_element_by_id("signinErrErr").text)
+        except NoSuchElementException as e:
+            log_data['messages'].append("Field verification with incorrect data failed")
+        except Exception as e:
+            log_data['error'] = str(e)
+        
+        self.logger(log_data)
+
+    '''
+    -- Verify if correct login details redirect properly
+    '''
+    def login_test(self, email_phone, password, test_name="Successful Login Test"):
+        log_data = {'test_name':test_name, 'messages':[], 'error':''}
+
+        try:
+            # get a handle to the input fields, and login button
+            select_email_phone = self.driver.find_element_by_id("signinInpEmailAddress")
+            select_pwd = self.driver.find_element_by_id("signinInpPassword")
+            login_button = self.driver.find_element_by_id("signinBtnSignin")
+            
             # enter the email and password
             select_email_phone.clear()
             select_pwd.clear()
@@ -57,19 +99,8 @@ class Tester:
                 time.sleep(0.1)
                 self.driver.find_element_by_id("headerBtnSignIn").click()
                 time.sleep(0.1)
-            # empty username and password
-            elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed() and self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
-                log_data['messages'].append("Email/Phone not entered")
-                log_data['messages'].append("Password not entered")
-            # empty password
-            elif self.driver.find_element_by_id("signinErrValidPassword").is_displayed():
-                log_data['messages'].append("Password not entered")
-            # empty username
-            elif self.driver.find_element_by_id("signinErrValidEmail").is_displayed():
-                log_data['messages'].append("Email/Phone not entered")
-            # wrong username and/or password
-            elif self.driver.find_element_by_id("signinErrErr").is_displayed():
-                log_data['messages'].append(self.driver.find_element_by_id("signinErrErr").text)
+            else:
+                log_data['messages'].append("Login failed")
         except Exception as e:
             log_data['error'] = str(e)
         
@@ -182,7 +213,7 @@ class Tester:
         '''
         -- TEST 02 - successful login and correct field verification test
         '''
-        self.field_validation_test("hanzallah@gmail.com","1234", "Successful login test")
+        self.login_test("hanzallah@gmail.com","1234", "Successful login test")
 
         '''
         -- TEST 03 - Remember Me test
