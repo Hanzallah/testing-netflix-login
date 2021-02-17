@@ -49,3 +49,20 @@ export function findUser(email, password) {
     return passwordErr;
   else return 1;
 }
+
+export function findEmail(email) {
+  let containsEmail = false;
+
+  for (var key in users) {
+    if (users.hasOwnProperty(key)) {
+      if (email === users[key].email) {
+        containsEmail = true;
+      }
+    }
+  }
+  const emailErr = "We could not find an account associated with this email address. Please try again or create a new account.";
+
+  if (containsEmail === false)
+    return emailErr;
+  else return 1;
+}
