@@ -155,25 +155,50 @@ class Tester:
         
         self.logger(log_data)
 
-
     '''
     -- Verify if forgot password changed password properly
     '''
     def forgot_password_test(self, email_phone, test_name="Forgot Password Test"):
         log_data = {'test_name':test_name, 'messages':[], 'error':''}
 
-        # get a handle to the input fields, and login button
-        select_email_phone = self.driver.find_element_by_id("signinInpEmailAddress")
-        select_pwd = self.driver.find_element_by_id("signinInpPassword")
-        login_button = self.driver.find_element_by_id("signinBtnSignin")
+        try:
+            # get a handle to the forgot password button and click it
+            forgot_button = self.driver.find_element_by_id("signinBtnForgotPassword")
+            forgot_button.click()
+            time.sleep(0.5)
+
+            # get handles to email and button
+            select_email_phone = self.driver.find_element_by_id("forgotInpEmail")
+            submit_button = self.driver.find_element_by_id("forgotBtnSubmit")
+
+            #fill email and submit
+            select_email_phone.clear()
+            select_email_phone.send_keys(email_phone)
+            time.sleep(0.2)
+            submit_button.click()
+            time.sleep(0.5)
+
+            #check if email was sent successfuly
+            try:
+                if self.driver.find_element_by_id('successMsg').is_displayed():
+                    log_data['messages'].append('Password reset email sent successfully')
+                elif self.driver.find_element_by_id('errorMsg').is_displayed():
+                    log_data['messages'].append('Password reset email sending failed')
+
+            except NoSuchElementException as e:
+                log_data['messages'].append('Password reset email sending failed')
+            
+            #clean up / go to signin page
+            self.driver.find_element_by_id('forgotBtnSignin').click()
+        except Exception as e:
+            log_data['error'] = str(e)
 
         self.logger(log_data)
-        pass
 
     '''
     -- Verify if the session times out properly
     '''
-    def session_timout_test(self, email_phone, password, test_name="Session Timeout Test"):
+    def session_timout_test(self, email_phone, password, timeout=20, test_name="Session Timeout Test"):
         log_data = {'test_name':test_name, 'messages':[], 'error':''}
 
         try:
@@ -194,13 +219,13 @@ class Tester:
             time.sleep(1)
 
             #wait for timeout to happen
-            time.sleep(20)
+            time.sleep(timeout)
 
             #check if session timed out
-            if (self.driver.current_url == 'http://localhost:3000/'):
+            if (self.driver.current_url == self.url):
                 log_data['messages'].append("Successful Session Timeout")
             else:
-                log_data['messages'].append("Session Timeout failed")
+                log_data['messages'].append("Session did not timeout")
 
         except Exception as e:
             log_data['error'] = str(e)
@@ -264,10 +289,14 @@ class Tester:
         -- TEST 04 - Forgot Password test
         '''
 
+        self.forgot_password_test("hanzallah@gmail.com", "Forgot Password Test with correct email")
+        self.forgot_password_test("hanzallah", "Forgot Password Test with correct email")
+
         '''
         -- TEST 05 - Session timeout test
         '''
-        self.session_timout_test("hanzallah@gmail.com","1234")
+        self.session_timout_test("hanzallah@gmail.com","1234", 20, "Session Timeout 20sec test")
+        self.session_timout_test("hanzallah@gmail.com","1234", 10, "Session Timeout 10sec test")
 
         self.dispose()
         end = time.time()
