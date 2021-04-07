@@ -4,8 +4,6 @@ import json
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 
-# TODO Finish forgot password and the session timout tests
-
 class Tester:
     def __init__(self):
         super().__init__()
