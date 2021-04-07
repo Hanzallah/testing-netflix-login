@@ -3,8 +3,6 @@ import datetime
 import json
 from selenium import webdriver
 
-# TODO Finish forgot password and the session timout tests
-
 class Tester:
     def __init__(self):
         super().__init__()
